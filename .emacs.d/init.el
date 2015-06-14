@@ -5,6 +5,7 @@
 ;; -- Global Settings --
 ;; ---------------------
 (add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0/")
 (require 'cl)
 (require 'ido)
 (require 'ffap)
@@ -16,9 +17,10 @@
 (require 'whitespace)
 (require 'dired-x)
 (require 'compile)
+(require 'yasnippet)
 (ido-mode t)
 (menu-bar-mode -1)
-(normal-erase-is-backspace-mode 1)
+;;(normal-erase-is-backspace-mode 1)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (setq column-number-mode t)
@@ -27,6 +29,8 @@
 (setq show-trailing-whitespace t)
 (setq suggest-key-bindings t)
 (setq vc-follow-symlinks t)
+(setq yas-snippet-dirs '("~/.emacs.d/elpa/yasnippet-0.8.0/snippets"))
+(yas-global-mode 1)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -48,6 +52,9 @@
  '(vertical-border ((t nil)))
 )
 
+(setq make-backup-files nil)
+
+
 ;; ------------
 ;; -- Macros --
 ;; ------------
@@ -65,6 +72,7 @@
 (global-set-key "\M-d" 'delete-word)
 (global-set-key "\M-h" 'backward-delete-word)
 (global-set-key "\M-u" 'zap-to-char)
+(normal-erase-is-backspace-mode 0)
 
 ;; ---------------------------
 ;; -- JS Mode configuration --
@@ -75,3 +83,8 @@
 (require 'jade-mode)    
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+;; --------------------------
+;; -- server configuration --
+;; --------------------------
+(load "server-enable.el")

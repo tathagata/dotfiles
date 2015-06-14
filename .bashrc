@@ -162,7 +162,7 @@ shopt -s histappend
 
 # Make prompt informative
 # See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
-PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
+# PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
 
 ## -----------------------
 ## -- 2) Set up aliases --
@@ -175,7 +175,7 @@ alias cp="cp -i"
 set -o noclobber
 
 # 2.2) Listing, directories, and motion
-alias ll="ls -alrtF --color"
+alias ll="ls -alrtF"
 alias la="ls -A"
 alias l="ls -CF"
 alias dir='ls --color=auto --format=vertical'
@@ -185,12 +185,13 @@ alias ..='cd ..'
 alias ...='cd ..;cd ..'
 alias md='mkdir'
 alias cl='clear'
-alias du='du -ch --max-depth=1'
+alias dub="du -k ~/* | awk '$1 > 500000' | sort -nr"
 alias treeacl='tree -A -C -L 2'
 
 # 2.3) Text and editor commands
-alias em='emacs -nw'     # No X11 windows
-alias eqq='emacs -nw -Q' # No config and no X11
+alias Em='emacs -nw'     # No X11 windows, Apple Emacs
+alias eqq='emacs -nw -Q' # No config and no X11, Apple Emacs
+alias em="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 export EDITOR='emacs -nw'
 export VISUAL='emacs -nw' 
 
@@ -206,7 +207,7 @@ export LC_ALL=POSIX
 
 # 2.6) Install rlwrap if not present
 # http://stackoverflow.com/a/677212
-command -v rlwrap >/dev/null 2>&1 || { echo >&2 "Install rlwrap to use node: sudo apt-get install -y rlwrap";}
+#command -v rlwrap >/dev/null 2>&1 || { echo >&2 "Install rlwrap to use node: sudo apt-get install -y rlwrap";}
 
 # 2.7) node.js and nvm
 # http://nodejs.org/api/repl.html#repl_repl
@@ -225,3 +226,27 @@ fi
 
 ## Define any user-specific variables you want here.
 source ~/.bashrc_custom
+
+
+# 2.7) Python
+alias workon='. bin/activate'
+
+# 2.8) Git
+alias glog="git log --pretty=format:'%h %<(20)%an %s'"
+## Enable tab completion
+source ~/dotfiles/git-completion.bash
+
+# colors!
+green="\[\033[0;32m\]"
+blue="\[\033[0;34m\]"
+purple="\[\033[0;35m\]"
+reset="\[\033[0m\]"
+
+# Change command prompt
+source ~/dotfiles/git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=1
+# '\u' adds the name of the current user to the prompt
+# '\$(__git_ps1)' adds git-related stuff
+# '\W' adds the name of the current directory
+export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
+
