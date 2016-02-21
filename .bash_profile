@@ -65,8 +65,7 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/heroku/bin:$PATH # Heroku: https://toolbelt.heroku.com/standalone
 export PATH=/usr/local/smlnj/bin:$PATH # For programming language class
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH
+export PATH=/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
 
 # added by Anaconda 2.0.1 installer
 export PATH="/Users/t/anaconda/bin:$PATH"
-
-
